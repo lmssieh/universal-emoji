@@ -14,7 +14,7 @@ interface kaomjis {
 }
 
 interface Props {
-	kaomojis: kaomjis[];
+	data: kaomjis[];
 }
 
 const Home: NextPage = ({ data }: Props) => {

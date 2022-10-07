@@ -22,7 +22,7 @@ function Kaomoji({ data, className, onClick }: Props) {
 	return (
 		<div className={`${className || ""} max-w-[1200px] m-auto px-4`}>
 			{data.length !== 0 && (
-				<div className="flex flex-wrap py-8 gap-8 items-center justify-center">
+				<div className="flex flex-wrap py-4 gap-4 md:(py-8 gap-8) items-center justify-center">
 					{data.map(({ name, kaomoji }) => {
 						return (
 							<div
