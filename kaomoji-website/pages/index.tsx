@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import type { NextPage } from "next";
+import type { InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -8,6 +8,7 @@ import Header from "../components/Header";
 import Kaomojis from "../components/Kaomojis";
 import Notification from "../components/Notification";
 import SearchInput from "../components/SearchInput";
+import { type GetStaticProps } from "next";
 
 interface kaomjis {
 	[key: string]: string;
@@ -17,7 +18,9 @@ interface Props {
 	data: kaomjis[];
 }
 
-const Home: NextPage = ({ data }: Props) => {
+const Home: NextPage = ({
+	data,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [kaomojis, setKaomojis] = useState<kaomjis[]>(data);
 	const [searchResult, setSearchResult] = useState<kaomjis[]>(data);
@@ -89,7 +92,7 @@ const Home: NextPage = ({ data }: Props) => {
 	);
 };
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
 	const kaomjisURL =
 		"https://raw.githubusercontent.com/lmssieh/universal-emoji/main/assets/kaomojis.json";
 	const res = await fetch(kaomjisURL);
@@ -109,5 +112,5 @@ export async function getStaticProps(context) {
 			data: arr,
 		},
 	};
-}
+};
 export default Home;
