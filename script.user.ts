@@ -8,9 +8,22 @@
 // @description 9/26/2022, 10:45:49 PM
 // ==/UserScript==
 
+interface emojis {
+	[key: string]: {
+		"emoji": string;
+		"aliases": string[];
+		"tags": string[];
+	}
+}
+interface kaomojis {
+	[key: string]: string;
+}
+
+type Input = HTMLInputElement | HTMLTextAreaElement
+
 (function () {
-	let emojis = {};
-	let kaomojis = {};
+	let emojis: emojis = {};
+	let kaomojis: kaomojis = {};
 
 	let urls = [
 		"https://raw.githubusercontent.com/lmssieh/universal-emoji/main/assets/emojis.json",
@@ -21,6 +34,7 @@
 	Promise.all(promiseUrls)
 		.then((responses) => Promise.all(responses.map((r) => r.json())))
 		.then((data) => {
+			console.log(data)
 			emojis = { ...data[0] };
 			kaomojis = data[1];
 			console.log(emojis, kaomojis);
@@ -28,8 +42,7 @@
 		.then(main);
 
 	function main() {
-		function replaceText(str) {
-			console.log(str);
+		function replaceText(str: string) {
 			let newStr = str;
 			// emoji regex, find anything inside colons, ex: :rooster:
 			const regex = /(\:[\w\s]+\:)/g;
@@ -74,8 +87,9 @@
 			return newStr;
 		}
 
-		let debounce = null;
-		document.addEventListener("keyup", ({ target }) => {
+		let debounce: NodeJS.Timeout;
+		document.addEventListener("keyup", (event: KeyboardEvent) => {
+			const target = event.target as Input;
 			if (
 				target.tagName === "TEXTAREA" ||
 				(target.tagName === "INPUT" && target.type === "text")

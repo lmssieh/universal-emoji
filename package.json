@@ -1,0 +1,24 @@
+{
+	"name": "universal-emoji",
+	"version": "1.0.0",
+	"description": "![](https://i.imgur.com/1tf2XRs.gif)",
+	"main": "script.user.js",
+	"scripts": {
+		"build": "tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/lmssieh/universal-emoji.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/lmssieh/universal-emoji/issues"
+	},
+	"homepage": "https://github.com/lmssieh/universal-emoji#readme",
+	"devDependencies": {
+		"typescript": "^4.8.4"
+	}
+}
